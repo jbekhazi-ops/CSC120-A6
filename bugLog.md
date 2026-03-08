@@ -20,17 +20,16 @@ Brief description: A computer older than 2012 (but newer than 2000) should have 
 Failed unit test: testRefurbish2012
 
 ## Bug 6
-Brief description:  This function fails because the setOs function also fails and we debugged it earlier. 
-HOWEVER, the resale shop method should ask for an optional string and NOT a string "None" so that is another error that I do not know how to test for? How do I test for parameters being wrong?
+Brief description:  This function fails because the setOs function also fails and we debugged it earlier. (idk if it counts as its own error? or its caused because of above so we dont count it)
 Failed unit test: testRefurbishSetOS
 
 ## Bug 7
-Brief description:  
-Failed unit test: 
+Brief description:  printInventory() does not catch the IndexOutOfBoundError it produces which then disrupts the code.
+Failed unit test: testPrintInventory()
 
 ## Bug 8
-Brief description:  
-Failed unit test: 
+Brief description:  Since we are not catching the exception, we also run through a Runtime Error in the printInventory() function. 
+Failed unit test: testPrintInventory()
 
 ## Bug 9
 Brief description:  

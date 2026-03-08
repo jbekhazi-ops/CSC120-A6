@@ -72,6 +72,7 @@ public class ResaleShop {
         if (newOS != "None") {
             comp.setOS(newOS);
         }
+  
     }
 
     public static void main(String[] args) {
@@ -85,6 +86,7 @@ public class ResaleShop {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
+
     }
 
 

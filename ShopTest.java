@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.Test.None;
 
 import java.util.ArrayList;
+import javax.management.RuntimeErrorException;
 // what it is that you are checking for, we need to find the wrong thing
 // we need to identify 10 bugs
 
@@ -110,9 +111,39 @@ public class ShopTest {
     @Test(expected = RuntimeException.class)
     public void testRefurbishException(){
         shop.refurbish(comp, "new OS");
-        // checks if the computer is not in the inventory 
-        // but the problem is that it keeps running aftewards and then breaks??? we don't want that 
-        //But IDK what kind of expection do we need with that 
+    }
+
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testPrintInventory(){
+        try{
+            shop.inventory.add(comp);
+            shop.printInventory();
+        }
+        catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void testPrintInventoryRuntime(){
+        try{
+            shop.inventory.add(comp);
+            shop.printInventory();
+        }
+        catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testPrintEmptyInventory(){
+        try{
+            shop.printInventory();
+        }
+        catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
 }
