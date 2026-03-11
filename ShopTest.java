@@ -63,12 +63,6 @@ public class ShopTest {
         shop.sell(comp);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testSellAnother(){
-        shop.sell(comp);
-        // ?? idk which one, we could also use this with the buy function perhaps 
-    }
-
     @Test(timeout = TIMEOUT)
     public void testRefurbish2000(){
         comp.yearMade = 1999;
@@ -107,6 +101,22 @@ public class ShopTest {
         shop.refurbish(comp, "new OS");
         assertEquals("new OS", comp.operatingSystem);
     }  
+
+    @Test(timeout = TIMEOUT)
+    public void testRefurbishNull(){
+        shop.inventory.add(comp);
+        shop.refurbish(comp, "none");
+        // compare old OS of comp to new OS, it is supposed to not change 
+        assertEquals("High Sierra", comp.operatingSystem);
+    }  
+    
+    @Test(timeout = TIMEOUT)
+    public void testRefurbishNone(){
+        shop.inventory.add(comp);
+        shop.refurbish(comp, "None");
+        // compare old OS of comp to new OS, it is supposed to not change 
+        assertEquals("High Sierra", comp.operatingSystem);
+    }  
     
     @Test(expected = RuntimeException.class)
     public void testRefurbishException(){
@@ -114,37 +124,37 @@ public class ShopTest {
     }
 
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(timeout = TIMEOUT)
     public void testPrintInventory(){
         try{
             shop.inventory.add(comp);
             shop.printInventory();
         }
-        catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
+        catch(RuntimeException e){
+            fail("Method does not handle RuntimeException");
         }
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test(timeout = TIMEOUT)
     public void testPrintInventoryRuntime(){
         try{
             shop.inventory.add(comp);
             shop.printInventory();
         }
-        catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
+        catch(IndexOutOfBoundsException e){
+            fail("Method does not throw IndexOutOfBoundsException");
         }
     }
 
     @Test(timeout = TIMEOUT)
     public void testPrintEmptyInventory(){
         try{
+            shop.inventory.remove(0);
             shop.printInventory();
         }
-        catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
+        catch(IndexOutOfBoundsException e){
+            fail("Method runs into IndexOutOfBoundsException and does not throw it");
         }
     }
-
 }
 

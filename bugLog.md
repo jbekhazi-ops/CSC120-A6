@@ -20,20 +20,20 @@ Brief description: A computer older than 2012 (but newer than 2000) should have 
 Failed unit test: testRefurbish2012
 
 ## Bug 6
-Brief description:  This function fails because the setOs function also fails and we debugged it earlier. (idk if it counts as its own error? or its caused because of above so we dont count it)
+Brief description:  This function fails because the setOs function also fails and we debugged it earlier. (idk if it counts as its own error? or its caused because of an error above so we dont count it)
 Failed unit test: testRefurbishSetOS
 
 ## Bug 7
-Brief description:  printInventory() does not catch the IndexOutOfBoundError it produces which then disrupts the code.
-Failed unit test: testPrintInventory()
+Brief description:  Refurbish method is not flexible, mispellings of "None". changes the OS to None. It would be more efficient with an optional string
+Failed unit test: testRefurbishNull()
 
 ## Bug 8
 Brief description:  Since we are not catching the exception, we also run through a Runtime Error in the printInventory() function. 
-Failed unit test: testPrintInventory()
+Failed unit test: testPrintInventoryRuntime()
 
 ## Bug 9
-Brief description:  
-Failed unit test: 
+Brief description:  printInventory() does not catch the IndexOutOfBoundError it produces which then disrupts the code.
+Failed unit test: testPrintInventory()
 
 ## Bug 10
 Brief description:  
