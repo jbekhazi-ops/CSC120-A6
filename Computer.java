@@ -64,9 +64,14 @@ public class Computer {
         return this.description + "\n" + this.processorType  + "\n" + this.hardDriveCapacity  + "\n" + this.memory  + "\n" + this.operatingSystem  + "\n" + this.yearMade  + "\n" + this.price;  
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         Computer myComputer = new Computer("2019 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
-        System.out.println(myComputer);
+        //System.out.print(myComputer);
+        System.out.print("Hello");
+        System.out.println("Hi");
+        System.out.print("Hello");
+
+        
     }
 
 }

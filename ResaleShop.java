@@ -77,12 +77,12 @@ public class ResaleShop {
 
     public static void main(String[] args) {
         ResaleShop myShop = new ResaleShop(); 
-        myShop.printInventory();
+        //myShop.printInventory();
         Computer comp1 = new Computer("2019 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
         try {
-            myShop.buy(comp1);
-            myShop.refurbish(comp1, "NEW OS");
-            System.out.println(comp1);
+            myShop.inventory.add(comp1);
+            myShop.refurbish(comp1,null);
+            //System.out.println(comp1);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }

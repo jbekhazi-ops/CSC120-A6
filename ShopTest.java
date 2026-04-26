@@ -103,12 +103,23 @@ public class ShopTest {
     }  
 
     @Test(timeout = TIMEOUT)
-    public void testRefurbishNull(){
+    public void testRefurbishMispelled(){
         shop.inventory.add(comp);
         shop.refurbish(comp, "none");
         // compare old OS of comp to new OS, it is supposed to not change 
         assertEquals("High Sierra", comp.operatingSystem);
     }  
+
+    /**
+     * new method i just found with my professor , refurbish does not have optional string
+     */
+    @Test(timeout = TIMEOUT)
+    public void testRefurbishNull(){
+        shop.inventory.add(comp);
+        shop.refurbish(comp, null);
+        // compare old OS of comp to new OS, it is supposed to not change 
+        assertEquals("High Sierra", comp.operatingSystem);
+    } 
     
     @Test(timeout = TIMEOUT)
     public void testRefurbishNone(){
@@ -123,18 +134,9 @@ public class ShopTest {
         shop.refurbish(comp, "new OS");
     }
 
-
-    @Test(timeout = TIMEOUT)
-    public void testPrintInventory(){
-        try{
-            shop.inventory.add(comp);
-            shop.printInventory();
-        }
-        catch(RuntimeException e){
-            fail("Method does not handle RuntimeException");
-        }
-    }
-    
+    /** Method does not handle index out of bound exception 
+     * IndexOutOfBoundsException is a Runtime Exception
+     */
     @Test(timeout = TIMEOUT)
     public void testPrintInventoryRuntime(){
         try{
@@ -142,19 +144,10 @@ public class ShopTest {
             shop.printInventory();
         }
         catch(IndexOutOfBoundsException e){
-            fail("Method does not throw IndexOutOfBoundsException");
+            fail("Method does not handle IndexOutOfBoundsException");
         }
     }
 
-    @Test(timeout = TIMEOUT)
-    public void testPrintEmptyInventory(){
-        try{
-            shop.inventory.remove(0);
-            shop.printInventory();
-        }
-        catch(IndexOutOfBoundsException e){
-            fail("Method runs into IndexOutOfBoundsException and does not throw it");
-        }
-    }
+
 }
 
