@@ -190,8 +190,8 @@ public class ShopTest {
         shop.refurbish(comp, "new OS");
     }
 
-    /** Method does not handle index out of bound exception 
-     * IndexOutOfBoundsException is a Runtime Exception
+    /** FAILS
+     * Checks if method runs into an IndexOutofBounds Exception
      */
     @Test(timeout = TIMEOUT)
     public void testPrintInventoryException(){
