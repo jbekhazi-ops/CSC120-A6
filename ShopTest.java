@@ -23,24 +23,59 @@ public class ShopTest {
     private static final int TIMEOUT = 2000;
     // add your tests here 
 
+
+
+    /** FAILS
+     * Test for the memory parameter in the constructor of the Computer Class
+     */
+    @Test(timeout = TIMEOUT)
+    public void testConstructorMemory(){
+        Computer comp = new Computer("description", "processorType", 2, 10, "operatingSystem", 2018, 500);
+        assertEquals(10, comp.memory);
+    }
+
+
+    /** FAILS
+     * Test for the price parameter in the constructor of the Computer Class
+     */
+    @Test(timeout = TIMEOUT)
+    public void testConstructorPrice(){
+        Computer comp = new Computer("description", "processorType", 2, 10, "operatingSystem", 2018, 500);
+        assertEquals(500, comp.price);
+    }
+
+    /** PASSES
+     * Test for the setPrice() method in the Computer class
+     * Checks if setPrice sets the price attribute to the expected value.
+     */
     @Test(timeout = TIMEOUT)
     public void testSetPrice(){
         comp.setPrice(700);
         assertEquals(700, comp.price);
     }
     
+    /** FAILS
+     * Test for the SetOs() method in the Computer class
+     * Checks if setOs() sets the OS attribute to the given value.
+     */
     @Test(timeout = TIMEOUT)
     public void testSetOS(){
         comp.setOS("new OS");
         assertEquals("new OS", comp.operatingSystem);
     }
-    // first bug, the method setOS sets the OS to none instead of the new Os input. 
 
+
+    /** PASSES
+     * Test for the getYear() method in the Computer class
+     */
     @Test(timeout = TIMEOUT)
     public void testGetYear(){
         assertEquals(2017, comp.yearMade);
     }
 
+    /** FAILS
+     *  Checks whether the buy() method is the ResaleShop class adds the correct computer to the inventory
+     */
     @Test(timeout = TIMEOUT)
     public void testBuy(){
         shop.buy(comp);
@@ -48,6 +83,9 @@ public class ShopTest {
         assertEquals(comp, shop.inventory.get(inventorySize - 1));   
     }
 
+    /** FAILS
+     * Checks whether method buy() in the ResaleShop class checks if the computer already exists in the inventory before buying again
+     */
     @Test(timeout = TIMEOUT)
     public void testDoubleBuy(){
         shop.buy(comp);
@@ -58,11 +96,18 @@ public class ShopTest {
     }  
 
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void testSell(){
+    /** FAILS 
+     * Checks whether the method sell() can throw an exception if we are trying to sell a computer that is not in its inventory 
+     */
+    @Test(expected = RuntimeException.class)
+    public void testSell2(){
         shop.sell(comp);
     }
 
+
+    /** PASSES
+     * Checks if the second "if" statement of refurbish() behaves as expected 
+     */
     @Test(timeout = TIMEOUT)
     public void testRefurbish2000(){
         comp.yearMade = 1999;
@@ -71,6 +116,9 @@ public class ShopTest {
         assertEquals(0, comp.price);
     }
 
+    /** FAILS
+     * Checks if the first "else if" statement of refurbish() behaves as expected 
+     */
     @Test(timeout = TIMEOUT)
     public void testRefurbish2012(){
         comp.yearMade = 2011;
@@ -79,6 +127,9 @@ public class ShopTest {
         assertEquals(250, comp.price);
     }
 
+    /** PASSES
+     * Checks if the second "else if" statement of refurbish() behaves as expected 
+     */
     @Test(timeout = TIMEOUT)
     public void testRefurbish2018(){
         comp.yearMade = 2017;
@@ -87,6 +138,9 @@ public class ShopTest {
         assertEquals(550, comp.price);
     }
 
+    /** PASSES
+     * Checks if the "else" statement of refurbish() behaves as expected 
+     */
     @Test(timeout = TIMEOUT)
     public void testRefurbishElse(){
         comp.yearMade = 2019;
@@ -95,23 +149,9 @@ public class ShopTest {
         assertEquals(1000, comp.price);
     }
 
-    @Test(timeout = TIMEOUT)
-    public void testRefurbishNewOs(){
-        shop.inventory.add(comp);
-        shop.refurbish(comp, "new OS");
-        assertEquals("new OS", comp.operatingSystem);
-    }  
 
-    @Test(timeout = TIMEOUT)
-    public void testRefurbishMispelled(){
-        shop.inventory.add(comp);
-        shop.refurbish(comp, "none");
-        // compare old OS of comp to new OS, it is supposed to not change 
-        assertEquals("High Sierra", comp.operatingSystem);
-    }  
-
-    /**
-     * new method i just found with my professor , refurbish does not have optional string
+    /** FAILS
+     * Checks whether newOS is an optional parameter, and if user inputs null, then the current OS should remain unchanged.
      */
     @Test(timeout = TIMEOUT)
     public void testRefurbishNull(){
@@ -120,15 +160,31 @@ public class ShopTest {
         // compare old OS of comp to new OS, it is supposed to not change 
         assertEquals("High Sierra", comp.operatingSystem);
     } 
-    
+
+    /** FAILS
+     * Checks if the refurbish() method in ResaleShop class can accept variations of the spelling of "None"
+     */
+    @Test(timeout = TIMEOUT)
+    public void testRefurbishMispelled(){
+        shop.inventory.add(comp);
+        shop.refurbish(comp, "none");
+        // compare old OS of comp to new OS, it is supposed to not change 
+        assertEquals("High Sierra", comp.operatingSystem);
+    }  
+
+    /** PASSES
+     * Test for refurbish() method from ResaleShop class. Compares old OS of comp to new OS, it is supposed to not change if input is "None" 
+     */
     @Test(timeout = TIMEOUT)
     public void testRefurbishNone(){
         shop.inventory.add(comp);
         shop.refurbish(comp, "None");
-        // compare old OS of comp to new OS, it is supposed to not change 
         assertEquals("High Sierra", comp.operatingSystem);
     }  
     
+    /**Passes
+     * Checks if refurbish() throws a RuntimeException if the computer is not in the inventory
+     */
     @Test(expected = RuntimeException.class)
     public void testRefurbishException(){
         shop.refurbish(comp, "new OS");
@@ -138,15 +194,17 @@ public class ShopTest {
      * IndexOutOfBoundsException is a Runtime Exception
      */
     @Test(timeout = TIMEOUT)
-    public void testPrintInventoryRuntime(){
+    public void testPrintInventoryException(){
         try{
             shop.inventory.add(comp);
             shop.printInventory();
         }
         catch(IndexOutOfBoundsException e){
-            fail("Method does not handle IndexOutOfBoundsException");
+            fail("Method has an IndexOutofBound exception");
         }
     }
+
+
 
 
 }

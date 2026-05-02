@@ -77,15 +77,22 @@ public class ResaleShop {
 
     public static void main(String[] args) {
         ResaleShop myShop = new ResaleShop(); 
-        //myShop.printInventory();
         Computer comp1 = new Computer("2019 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
+        Computer comp2 = new Computer("2019  Pro", "Intel", 25, 14, "Sierra", 2019, 800);
+            myShop.inventory.add(comp1);
+            myShop.inventory.add(comp2);
+            //myShop.refurbish(comp1,null);
+            myShop.printInventory();
+        /** 
         try {
             myShop.inventory.add(comp1);
-            myShop.refurbish(comp1,null);
-            //System.out.println(comp1);
+            myShop.inventory.add(comp2);
+            //myShop.refurbish(comp1,null);
+            myShop.printInventory();
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
+            */
 
     }
 
